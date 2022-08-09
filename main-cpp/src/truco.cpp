@@ -1,9 +1,12 @@
 #include "truco.h"
+#include"mazo.h"
 using std::cin;
 using std::cout;
 using std::string;
 using std::endl;
-int menuDeJuego()
+
+
+int menuDeJuego(Mazo* mazo)
 {
     string buffer;
     // Logica de los jugadores.

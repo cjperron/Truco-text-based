@@ -1,22 +1,18 @@
 #include "truco.h"
-#include<string.h>
+#include"mazo.h"
+
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 
-void mypause(void)
-{
-    printf("Press [Enter] to continue . . .");
-    fflush(stdout);
-    getchar();
-}
+
 
 int main(int argc, char *argv[])
 {
     string buffer = "1";
     // Inicializaciones de constructores.......
-
+    Mazo mazo; //Tengo el mazo.
     // --
     do
     {
@@ -26,6 +22,7 @@ int main(int argc, char *argv[])
         cout<< KGRN << "T  R  U  C  O\t\t" << KCYN << "Unix version\n"
             << KWHT << "1. Jugar\n2. Opciones\n3. Salir\n"
             << KNRM << endl;
+        // cout << "DEBUG: \nMazo: \n" << mazo.toString() << endl;
         do
         {
             cout << ">>";
@@ -35,14 +32,13 @@ int main(int argc, char *argv[])
         {
         case '1':
             // Aca sale el menu de juego.
-            menuDeJuego();
+            menuDeJuego(&mazo);
             break;
         case '2':
             break;
         case '3':
             break;
         default:
-
             break;
         }
 

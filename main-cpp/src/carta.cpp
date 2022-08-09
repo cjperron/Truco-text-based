@@ -36,16 +36,28 @@ void Carta::setValor(int valor)
 //Constructor default.
 Carta::Carta(Palo palo, int valor, string nombre)
 {
+    total_cartas++;
     this->palo = palo;
     this->valor = valor;
     this->nombre = nombre;
+    this->gana_ronda = false;
 }
 //Copia de otra clase carta.
-Carta::Carta(Carta carta)
+Carta::Carta(const Carta& carta)
 {
+    total_cartas++;
     this->nombre = carta.nombre;
     this->palo = carta.palo;
     this->valor = carta.valor;
+    this->gana_ronda = false;
+}
+Carta::Carta()
+{
+    total_cartas++;
+    this->nombre = "";
+    this->palo = Espada;
+    this->valor = 1;
+    this->gana_ronda = false;
 }
 //Devolver el palo como string.
 string Carta::sgetPalo(Palo palo)
@@ -68,5 +80,6 @@ string Carta::sgetPalo(Palo palo)
 //Metodo toString()
 string Carta::toString()
 {
-    return "Carta {nombre: "+this->nombre+" , palo: "+sgetPalo(this->palo)+" , valor: "+this->valor+" }";
+    return "Carta {nombre: "+this->nombre+" , palo: "+ sgetPalo(this->palo) +" , valor: "+std::to_string(this->valor)+" }";
 }
+int Carta::total_cartas = 0;

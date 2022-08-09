@@ -10,8 +10,10 @@ private:
     bool gana_ronda; // Si gano o no
     string nombre;   // En reemplazo de char[]
 public:
+    static int total_cartas;
     Carta(Palo palo, int valor, string nombre); // La ronda no es necesaria
-    Carta(Carta carta); //En caso de copiar :)
+    Carta(const Carta& carta); //En caso de copiar :)
+    Carta();
     // Setters
     void setPalo(Palo palo);
     void setValor(int valor);
@@ -25,6 +27,9 @@ public:
 
     string toString();
     string sgetPalo(Palo palo);
+
+    
 };
+
 
 #endif

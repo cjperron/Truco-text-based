@@ -78,7 +78,6 @@ typedef enum
     Catamarca
 } Provincia;
 
-int menuDeJuego();
 int menuDePersonaje();
 
 #endif
