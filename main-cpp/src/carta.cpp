@@ -33,7 +33,11 @@ void Carta::setValor(int valor)
 {
     this->valor = valor;
 }
-//Constructor default.
+Carta::~Carta()
+{
+}
+
+// Constructor default.
 Carta::Carta(Palo palo, int valor, string nombre)
 {
     total_cartas++;
@@ -42,10 +46,10 @@ Carta::Carta(Palo palo, int valor, string nombre)
     this->nombre = nombre;
     this->gana_ronda = false;
 }
-//Copia de otra clase carta.
-Carta::Carta(const Carta& carta)
+// Copia de otra clase carta.
+Carta::Carta(const Carta &carta)
 {
-    total_cartas++;
+    //total_cartas++;
     this->nombre = carta.nombre;
     this->palo = carta.palo;
     this->valor = carta.valor;
@@ -53,33 +57,44 @@ Carta::Carta(const Carta& carta)
 }
 Carta::Carta()
 {
-    total_cartas++;
     this->nombre = "";
     this->palo = Espada;
     this->valor = 1;
     this->gana_ronda = false;
+    total_cartas++;
 }
-//Devolver el palo como string.
+Carta Carta::operator=(const Carta &carta)
+{
+    this->nombre = carta.nombre;
+    this->palo = carta.palo;
+    this->valor = carta.valor;
+    this->gana_ronda = false;
+    return *this;
+}
+
+
+// Devolver el palo como string.
 string Carta::sgetPalo(Palo palo)
 {
-    switch(palo)
+    switch (palo)
     {
-        case Espada:
-            return "Espada";
-        case Basto:
-            return "Basto";
-        case Oro:
-            return "Oro";
-        case Copa:
-            return "Copa";
-        default:
-            return nullptr;
+    case Espada:
+        return "Espada";
+    case Basto:
+        return "Basto";
+    case Oro:
+        return "Oro";
+    case Copa:
+        return "Copa";
+    default:
+        return "";
     }
-    return nullptr;
+    return "";
 }
-//Metodo toString()
+// Metodo toString()
 string Carta::toString()
 {
-    return "Carta {nombre: "+this->nombre+" , palo: "+ sgetPalo(this->palo) +" , valor: "+std::to_string(this->valor)+" }";
+    return "Carta {nombre: " + this->nombre + " , palo: " + sgetPalo(this->palo) + " , valor: " + std::to_string(this->valor) + " }";
 }
+
 int Carta::total_cartas = 0;

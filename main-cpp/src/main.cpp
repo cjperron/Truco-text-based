@@ -1,5 +1,6 @@
 #include "truco.h"
 #include"mazo.h"
+#include"funciones.h"
 
 using std::cin;
 using std::cout;
@@ -22,7 +23,10 @@ int main(int argc, char *argv[])
         cout<< KGRN << "T  R  U  C  O\t\t" << KCYN << "Unix version\n"
             << KWHT << "1. Jugar\n2. Opciones\n3. Salir\n"
             << KNRM << endl;
-        // cout << "DEBUG: \nMazo: \n" << mazo.toString() << endl;
+        /* cout << "DEBUG: \nMazo: \n" << mazo.toString() << endl;
+        cout << "Luego de mezclar:" << endl << "Mazo: \n";
+        mazo.mezclarMazo();
+        cout << mazo.toString() << endl; */  // ANDA
         do
         {
             cout << ">>";

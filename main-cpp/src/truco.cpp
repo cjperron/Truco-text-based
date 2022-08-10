@@ -1,5 +1,7 @@
-#include "truco.h"
+//#include "truco.h"
 #include"mazo.h"
+#include"funciones.h"
+
 using std::cin;
 using std::cout;
 using std::string;
