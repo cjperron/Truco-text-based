@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     string buffer = "1";
     // Inicializaciones de constructores.......
     Mazo mazo; //Tengo el mazo.
+    Jugador jugador; //El constructor revisa el seleccionado, si no hay, se asume que no existen jugadores.
     // --
     do
     {
@@ -27,6 +28,8 @@ int main(int argc, char *argv[])
         cout << "Luego de mezclar:" << endl << "Mazo: \n";
         mazo.mezclarMazo();
         cout << mazo.toString() << endl; */  // ANDA
+        ofstream archivo_log(FILE_LOG_MAZO);
+        archivo_log << mazo.mezclarMazo().toString();
         do
         {
             cout << ">>";
@@ -36,7 +39,7 @@ int main(int argc, char *argv[])
         {
         case '1':
             // Aca sale el menu de juego.
-            menuDeJuego(&mazo);
+            menuDeJuego(&mazo, &jugador);
             break;
         case '2':
             break;
@@ -45,7 +48,6 @@ int main(int argc, char *argv[])
         default:
             break;
         }
-
     } while (buffer != "3");
     system("clear");
     return 0;

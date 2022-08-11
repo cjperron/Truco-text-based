@@ -22,6 +22,7 @@
 #define FILE_JUGADORES "../bin/jugadores.truco"
 #define FILE_MAZO "../bin/mazo.truco"
 #define FILE_LOG "../log.txt"
+#define FILE_LOG_MAZO "../bin/mazo.txt"
 #define FILE_TOTAL "../bin/sensitive_data.dat"
 #define FILE_PJ_SEL "../bin/pj_seleccionado.truco"
 #define FILE_OPTION "../bin/options.truco"

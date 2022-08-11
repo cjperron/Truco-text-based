@@ -1,0 +1,43 @@
+Mazo {
+Carta {nombre: 2 de Basto  , palo: Basto , valor: 2 }
+Carta {nombre: 5 de Espada  , palo: Espada , valor: 5 }
+Carta {nombre: 3 de Espada  , palo: Espada , valor: 3 }
+Carta {nombre: 1 de Copa  , palo: Copa , valor: 1 }
+Carta {nombre: 11 de Oro  , palo: Oro , valor: 11 }
+Carta {nombre: 7 de Basto  , palo: Basto , valor: 7 }
+Carta {nombre: 4 de Oro  , palo: Oro , valor: 4 }
+Carta {nombre: 10 de Oro  , palo: Oro , valor: 10 }
+Carta {nombre: 10 de Basto  , palo: Basto , valor: 10 }
+Carta {nombre: 4 de Espada  , palo: Espada , valor: 4 }
+Carta {nombre: 2 de Oro  , palo: Oro , valor: 2 }
+Carta {nombre: 11 de Copa  , palo: Copa , valor: 11 }
+Carta {nombre: 1 de Oro  , palo: Oro , valor: 1 }
+Carta {nombre: 1 de Basto  , palo: Basto , valor: 1 }
+Carta {nombre: 5 de Basto  , palo: Basto , valor: 5 }
+Carta {nombre: 6 de Basto  , palo: Basto , valor: 6 }
+Carta {nombre: 2 de Espada  , palo: Espada , valor: 2 }
+Carta {nombre: 3 de Oro  , palo: Oro , valor: 3 }
+Carta {nombre: 5 de Copa  , palo: Copa , valor: 5 }
+Carta {nombre: 7 de Oro  , palo: Oro , valor: 7 }
+Carta {nombre: 7 de Espada  , palo: Espada , valor: 7 }
+Carta {nombre: 1 de Espada  , palo: Espada , valor: 1 }
+Carta {nombre: 3 de Copa  , palo: Copa , valor: 3 }
+Carta {nombre: 7 de Copa  , palo: Copa , valor: 7 }
+Carta {nombre: 6 de Oro  , palo: Oro , valor: 6 }
+Carta {nombre: 6 de Copa  , palo: Copa , valor: 6 }
+Carta {nombre: 6 de Espada  , palo: Espada , valor: 6 }
+Carta {nombre: 11 de Espada  , palo: Espada , valor: 11 }
+Carta {nombre: 11 de Basto  , palo: Basto , valor: 11 }
+Carta {nombre: 5 de Oro  , palo: Oro , valor: 5 }
+Carta {nombre: 12 de Espada  , palo: Espada , valor: 12 }
+Carta {nombre: 12 de Oro  , palo: Oro , valor: 12 }
+Carta {nombre: 2 de Copa  , palo: Copa , valor: 2 }
+Carta {nombre: 4 de Copa  , palo: Copa , valor: 4 }
+Carta {nombre: 3 de Basto  , palo: Basto , valor: 3 }
+Carta {nombre: 4 de Basto  , palo: Basto , valor: 4 }
+Carta {nombre: 12 de Copa  , palo: Copa , valor: 12 }
+Carta {nombre: 10 de Copa  , palo: Copa , valor: 10 }
+Carta {nombre: 12 de Basto  , palo: Basto , valor: 12 }
+Carta {nombre: 10 de Espada  , palo: Espada , valor: 10 }
+
+ }

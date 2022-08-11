@@ -14,7 +14,7 @@ public:
     Mazo(void);
     // void setCarta(int index, Carta carta);
     Carta getCarta(int index);
-    void mezclarMazo(void);
+    Mazo& mezclarMazo(void);
     
     string toString();
     

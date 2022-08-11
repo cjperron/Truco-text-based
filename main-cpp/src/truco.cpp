@@ -1,14 +1,13 @@
 //#include "truco.h"
 #include"mazo.h"
 #include"funciones.h"
-
 using std::cin;
 using std::cout;
 using std::string;
 using std::endl;
 
 
-int menuDeJuego(Mazo* mazo)
+int menuDeJuego(Mazo* mazo, Jugador* jugador)
 {
     string buffer;
     // Logica de los jugadores.
@@ -34,7 +33,7 @@ int menuDeJuego(Mazo* mazo)
                 // do something
                 break;
             case '3':
-                menuDePersonaje();
+                menuDePersonaje(jugador);
                 break;
             case '4':
                 break;

@@ -14,9 +14,10 @@ private:
     
 public:
     //1 sobrecarga, 1 para el jugador, otra para la tienda.
+    Item();
     Item(string codigo, string descripcion, int cantidadDisponible);
     Item(string descripcion, int cantDisponible, double precio);
-
+    Item operator=(const Item &item);
     //Getters
     string getCodigo();
     string getDescripcion();
@@ -24,6 +25,7 @@ public:
     double getPrecio();
 
     //Setters
+    void setCodigo(string codigo);
     void setDescripcion(string descripcion);
     void setCantDisponible(int cantDisponible);
     void setPrecio(double precio);

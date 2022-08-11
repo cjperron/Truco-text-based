@@ -1,10 +1,12 @@
 #include"truco.h"
+#include"funciones.h"
+#include"jugador.h"
 using std::cin;
 using std::cout;
 using std::string;
 using std::endl;
 
-int menuDePersonaje()
+int menuDePersonaje(Jugador* jugador)
 {
     string buffer;
     do
@@ -19,8 +21,16 @@ int menuDePersonaje()
         switch(buffer[0])
         {
             case '1':
+                if(crearPersonaje())
+                    cout << KGRN << "Personaje creado con exito\n" << KNRM;
+                else
+                    cout << KRED << "Error al crear el personaje\n" << KNRM;
                 break;
             case '2':
+                if(selectJugador(jugador))
+                    cout << KGRN << "Personaje seleccionado con exito\n" << KNRM;
+                else
+                    cout << KRED << "Error: Personaje no existe, o ocurrio un error inesperado.\n" << KNRM;
                 break;
             case '3':
                 break;
