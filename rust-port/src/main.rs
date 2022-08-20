@@ -35,7 +35,7 @@ fn main() {
     loop {
         limpiar_pantalla();
         print_menu();
-        //println!("{}", ej.to_gl_string());
+        println!("Personaje seleccioando: {}", p1.nombre.magenta());
         print!("{}", ">>".blue());
         stdout().flush().expect("Error flusheando stdout");
         let mut s = String::new();
@@ -45,6 +45,7 @@ fn main() {
                 loop {
                     limpiar_pantalla();
                     println!("{}\n{}\n{}\n{}", "1. Partido vs IA".green(), "2. Torneo 'San Bonifacio'".yellow(), "3. Personaje".cyan(), "4. Salir".red());
+                    println!("Personaje seleccioando: {}", p1.nombre.magenta());
                     print!("{}", ">>".blue());
                     stdout().flush().expect("Error flusheando stdout");
                     let mut s = String::new();
@@ -89,10 +90,10 @@ fn menu_personaje(pj: &mut Jugador){
                 }
             }
             '2' => { //No anda
+                let term_s = Term::stdout();
                 println!("{}", "Elejir personaje".italic());
                 use std::fs;
                 let paths = fs::read_dir("./").unwrap();
-                //DEBUG
                 for path in paths {
                     let buf = String::from(path.unwrap().path().display().to_string());
                     if buf.contains(".json") {
@@ -106,6 +107,20 @@ fn menu_personaje(pj: &mut Jugador){
                     }
                 }
                 //Se mostraron los jugadores creados
+                let mut buf = String::new();
+                while buf.is_empty() {
+                    print!("Seleccione jugador ({}): ", "id".blue().bold());
+                    stdout().flush().unwrap();
+                    buf = term_s.read_line().unwrap();
+                }
+                let num: u32 = buf.parse().unwrap();
+                if Jugador::select_player(num).1 {
+                    *pj = Jugador::select_player(num).0
+                }
+                else {
+                    println!("{}", "No existe jugador.".red().italic());
+                }
+                
 
             }
             '3' => {break;},

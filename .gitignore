@@ -9,3 +9,4 @@ main-cpp/test-cpp/test1.cpp
 main-cpp/test-cpp/punto.bin
 main-cpp/test-cpp/a.out
 rust-port/target/*
+*.json

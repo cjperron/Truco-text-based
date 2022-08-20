@@ -2,7 +2,7 @@
 #![allow(unused_imports)]
 pub mod jugador {
     use std::fmt::format;
-    use std::fs::File;
+    use std::fs::{File, self};
     use std::io::{Write, Read};
     use std::result;
 
@@ -53,7 +53,7 @@ pub mod jugador {
     #[derive(Debug)]
     #[derive(Serialize, Deserialize)]
     pub struct Jugador {
-        id: u32,
+        pub id: u32,
         lvl: u8,
         sexo: Sexo,
         descripcion: String,
@@ -76,6 +76,19 @@ pub mod jugador {
                 sexo: sexo,
                 descripcion: descripcion.to_string(),
                 nombre: nombre.to_string(),
+                estadisticas: Estadisticas::from(0, 0.0),
+                mano: [Carta::new(), Carta::new(), Carta::new()],
+                codigos: Vec::new(),
+                items: Vec::new(),
+            }
+        }
+        pub fn empty() -> Jugador {
+            Jugador{
+                id: 0,
+                lvl: 0,
+                sexo: Sexo::Masculino,
+                descripcion: String::new(),
+                nombre: String::new(),
                 estadisticas: Estadisticas::from(0, 0.0),
                 mano: [Carta::new(), Carta::new(), Carta::new()],
                 codigos: Vec::new(),
@@ -203,7 +216,23 @@ pub mod jugador {
             let pj: Jugador = serde_json::from_str(json_string.as_str()).expect("Error leyendo");
             (pj, true)
         }
-        
+        pub fn select_player(id: u32) -> (Jugador, bool) {
+            let paths = fs::read_dir("./").unwrap();
+                for path in paths {
+                    let buf = String::from(path.unwrap().path().display().to_string());
+                    if buf.contains(".json") {
+                        // println!("path: {}", buf); tengo el path correcto.
+                        let mut file = File::open(buf).unwrap();
+                        let mut s_json = String::new();
+                        file.read_to_string(&mut s_json).unwrap();
+                        let tmpj: Jugador = serde_json::from_str(s_json.as_str()).unwrap();
+                        if tmpj.id == id {
+                            return (tmpj, true);
+                        }
+                    }
+                }
+                (Jugador::empty(), false)
+        }
     }
     fn u32_to_u8arr(x: u32) -> [u8; 4] {
         let p1: u8 = ((x >> 24) & 0xff) as u8;
