@@ -18,6 +18,10 @@ public:
     Atributo& setEstado(Nivel estado);
     Atributo& setXpInterna(int xp);
     Atributo& setNombre(string nombre);
+
+    string sgetEstado();
+
+    string toString();
 };
 
 class Stats
@@ -25,16 +29,20 @@ class Stats
 private:
     unsigned long xp;
     double dinero;
-public:
     Atributo A_mentiroso;
     Atributo A_pescador;
     Atributo A_agresividad;
     Atributo A_tramposo;
+public:
+    Stats();
+    
     Stats operator=(const Stats &estadisticas);
     Stats& setDinero(double x);
     Stats& setXp(unsigned long xp);
-
-    Stats();
+    
+    double getDinero();
+    unsigned long getXp();
+    string toString();
 };
 
 

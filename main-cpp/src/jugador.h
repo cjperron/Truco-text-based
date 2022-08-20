@@ -43,6 +43,7 @@ public:
 
     //Metodos
     void print();
+    string toString();
 };
 
 #endif

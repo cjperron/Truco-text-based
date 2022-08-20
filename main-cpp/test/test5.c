@@ -3,8 +3,11 @@ typedef struct{
     int x;
     int y;
 } Punto ;
+
 int main(){
+
     Punto puntos[3];
+    
     Punto algun_punto ={
         .x = 10,
         .y = 5

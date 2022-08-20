@@ -15,7 +15,9 @@ int main(int argc, char *argv[])
     // Inicializaciones de constructores.......
     Mazo mazo; //Tengo el mazo.
     Jugador jugador; //El constructor revisa el seleccionado, si no hay, se asume que no existen jugadores.
-    // --
+    // -- Cuando se crea el personaje todo ok, lee cualquier cosa
+    cout << jugador.toString() << endl;
+    while(true);
     do
     {
         system("clear");

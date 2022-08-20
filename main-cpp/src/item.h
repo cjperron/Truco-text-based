@@ -34,6 +34,7 @@ public:
     // Metodos
     string devolverCodigoRandom(void);
 
+    string toString();
 };
 
 #endif

@@ -23,6 +23,9 @@ Item::Item()
 {
     this->cantDisponible = 0;
     this->precio = 0.0f;
+    // prueba
+    // this->codigo = "ABC123";
+    // this->descripcion = "Prueba";
 }
 // Metodos
 
@@ -69,38 +72,42 @@ Item Item::operator=(const Item &item)
     this->precio = item.precio;
     return *this;
 }
+string Item::toString()
+{
+    return "Item { codigo: " + this->codigo + ", descripcion: " + this->descripcion + ", precio: " +  std::to_string(this->precio) + ", cantidad_disponible: " + std::to_string(this->cantDisponible) + " }";
+}
 
 
 //Jugador
 Jugador::Jugador()
 {
     //primero recupero la cant de jugadores
-    readTotalJugadores(this);
+    if(readTotalJugadores(this)){ //Lee cualquier cosa, aparentemente.
+        this->setCantJugadores(1);
+    } 
+    cout << "total: " << getCantJugadores();
+    while(true);
     // Luego recupero el jugador seleccionado previamente.
     if(readJugadorSeleccionado(this))
     {
         //No existe el archivo de pj seleccionado, o no se pudo leer.
         //Entonces, pido que cree uno.
-        string buffer;
-        this->cant_de_jugadores = 1;
         this->id = 1;
+        this->lvl = 1;
         cout << KRED << "Se detecto que no se creo un personaje" << KNRM << endl;
         cout << KRED << "Por favor, cree uno" << KNRM << endl;
         cout << "Ingrese nombre: ";
-        cin >> buffer;
-        this->nombre = buffer;
-        buffer.clear();
-        fflush(stdin);
+        cin >> this->nombre;
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //Salteaba. . .
         cout << "Ingrese descripcion: "; //Ingresar con " "
-        std::getline(cin, buffer);
-        this->descripcion = buffer;
-        buffer.clear();
+        std::getline(cin, this->descripcion);
         cout << "Ingrese sexo (m/f): ";
         do
         {
             cin >> this->sexo;
         } while (toupper(this->sexo) != 'M' && toupper(this->sexo) != 'F');
-        //Aca se crea el archivo del pj.
+        // Normal check, stats check, inventario check.
+        //Aca se crea el archivo del pj.  HASTA ACA PONE BIEN TODO.
         if(writeJugador(this))
         {
             //No se pudo crear el archivo.
@@ -160,6 +167,18 @@ Jugador Jugador::operator=(const Jugador &jugador)
     this->id = jugador.id;
     this->descripcion = jugador.descripcion;
     return *this;
+}
+string Jugador::toString()
+{
+    string str = "Jugador { id: " + std::to_string(this->id) + ", lvl: " + std::to_string(this->lvl) + ",\nMano:\n1. " + this->mano[0].toString() + ",\n2. "+ this->mano[1].toString() + ",\n3. "+this->mano[2].toString() + ",\nnombre: " + this->nombre + ", descripcion: " + this->descripcion + ", Sexo: ";
+    str += this->sexo;
+    str += ",\nEstadisticas:\n" + this->estadisticas.toString() + "\nInventario:\n";
+    for(int i = 0; i<50;i++)
+    {
+        str += this->inventario[i].toString();
+        str += '\n';
+    }
+    return str;
 }
 int Jugador::getId()
 {

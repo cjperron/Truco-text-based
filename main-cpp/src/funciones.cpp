@@ -13,21 +13,33 @@ int writeJugador(Jugador* jugador)
 int writeTotalJugadores(Jugador* jugador)
 {
     ofstream archivo_total(FILE_TOTAL, std::ios::binary | std::ios::out);
-    if(archivo_total.fail()) return 1;
+    if(archivo_total.fail()){
+        archivo_total.close();
+        return 1;
+    }
     int p = jugador->getCantJugadores();
     //cout << "p: " << jugador.getCantJugadores() << endl;
     archivo_total.write((char *)&p, sizeof(int));
-    if(archivo_total.fail()) return 2;
+    if(archivo_total.fail()){
+        archivo_total.close();
+        return 2;
+    }   
     archivo_total.close();
     return 0;
 }
 int readTotalJugadores(Jugador* jugador)
 {
     ifstream archivo_total(FILE_TOTAL, std::ios::binary | std::ios::in);
-    if(archivo_total.fail()) return 1;
+    if(archivo_total.fail()) {
+        archivo_total.close();
+        return 1;
+    }
     int p;
     archivo_total.read((char *)&p, sizeof(int));
-    if(archivo_total.fail()) return 1;
+    if(archivo_total.fail()){
+        archivo_total.close();
+        return 1;
+    } 
     //cout << "p: " << p << endl;
     jugador->setCantJugadores(p);
     archivo_total.close();
