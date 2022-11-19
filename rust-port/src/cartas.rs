@@ -5,20 +5,20 @@ pub mod carta{
 
     use std::{fs::File, io::{Write, Read}};
     use serde::{Serialize, Deserialize};
-    #[derive(Serialize, Deserialize, Debug)]
-
+    #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
+    #[derive(PartialEq, PartialOrd)]
     pub enum Palo{
         Espada,
         Basto,
         Oro,
         Copa
     }
-    #[derive(Debug)]
+    #[derive(Debug, Clone)]
     #[derive(Serialize, Deserialize)]
     pub struct Carta{
-        palo: Palo,
-        nombre: String,
-        valor: u8
+        pub palo: Palo,
+        pub nombre: String,
+        pub valor: u8
     }
     impl Palo{
         pub fn to_string(&self) -> String {
@@ -45,13 +45,20 @@ pub mod carta{
         pub fn to_string(&self) -> String {
             return format!("Carta{{ valor: {}, palo: {}, nombre: {} }}", self.valor.to_string(), self.palo.to_string(), self.nombre);
         }
+        pub fn get_env_value(&self) -> u8 {
+            match self.valor {
+                0..=7 => { self.valor },
+                8..=12 => { 0 }
+                _ => panic!("Valor imposible"),
+            }
+        }
     }
 }
 pub mod mazo{
     use rand::{seq::SliceRandom};
-
+    #[derive(Debug)]
     pub struct Mazo{
-        cartas: Vec<crate::Carta>,
+        pub cartas: Vec<crate::Carta>,
     }
     impl Mazo {
         //Crea un mazo con todas las cartas del truco.

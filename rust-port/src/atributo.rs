@@ -2,6 +2,7 @@
 #![allow(unused_imports)]
 pub mod atributo {
     use std::{fs::File, io::{Write, Read}};
+    use rand::Rng;
     use serde::{Serialize, Deserialize};
     
     #[derive(Serialize, Deserialize)]
@@ -29,13 +30,39 @@ pub mod atributo {
                 Nivel::Dios => "Dios".to_string(),
             }
         }
+        pub fn r_new() -> Self {
+            let mut rng = rand::thread_rng();
+            match rng.gen_range(1..=8) {
+                1 => return Self::MuyBajo,
+                2 => return Self::Bajo,
+                3 => return Self::Normal,
+                4 => return Self::Alto,
+                5 => return Self::MuyAlto,
+                6 => return Self::Extremo,
+                7 => return Self::Maximo,
+                8 => return Self::Dios,
+                _ => return Self::MuyBajo,
+            }
+        }
+        pub fn get_prob(&self) -> f32 {
+            match self {
+                Nivel::MuyBajo => 5.0,
+                Nivel::Bajo => 14.67,
+                Nivel::Normal => 27.32,
+                Nivel::Alto => 38.32,
+                Nivel::MuyAlto => 53.23,
+                Nivel::Extremo => 67.34,
+                Nivel::Maximo => 82.45,
+                Nivel::Dios => 99.45,
+            }
+        }
     }
     #[derive(Debug)]    
     #[derive(Serialize, Deserialize)]
     pub struct Atributo {
-        nombre: String,
-        xp_interna: i32,
-        estado: Nivel,
+        pub nombre: String,
+        pub xp_interna: i32,
+        pub estado: Nivel,
     }
     impl Atributo {
         pub fn new() -> Atributo {
@@ -60,5 +87,6 @@ pub mod atributo {
                 self.estado.to_string()
             );
         }
+
     }
 }

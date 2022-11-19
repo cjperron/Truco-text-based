@@ -58,8 +58,8 @@ pub mod jugador {
         sexo: Sexo,
         descripcion: String,
         pub nombre: String,
-        estadisticas: Estadisticas,
-        mano: [Carta; 3],
+        pub estadisticas: Estadisticas,
+        pub mano: [Carta; 3],
         codigos: Vec<Codigo>,
         items: Vec<Item>,
     }
@@ -128,6 +128,32 @@ pub mod jugador {
         pub fn pretty_string(&self) -> String {
             return format!("id[{}], lvl[{}]\n{}{}\nDescripcion: {}\nSexo: {}",self.id.magenta().bold(), self.lvl.yellow().bold(), "Nombre: ".white().bold(), self.nombre,self.descripcion.italic(), self.sexo.to_string().underline());
         }
+        pub fn calc_envido(&self) -> u8 {
+            if self.mano[0].palo == self.mano[1].palo && self.mano[1].palo == self.mano[2].palo { //tiene flor
+                let mut ordered = [self.mano[0].get_env_value(), self.mano[1].get_env_value(), self.mano[2].get_env_value()];
+                ordered.sort();
+                return ordered[1] + ordered[2] + 20;
+            }
+            let conds = (self.mano[0].palo == self.mano[1].palo, self.mano[1].palo == self.mano[2].palo, self.mano[2].palo == self.mano[0].palo); // busco si hay palos que se repiten.
+            if conds.0 { 
+                return self.mano[0].get_env_value() + self.mano[1].get_env_value() + 20;
+            } 
+            else if conds.1 {
+                return self.mano[1].get_env_value() + self.mano[2].get_env_value() + 20;
+            }
+            else if conds.2 {
+                return self.mano[0].get_env_value() + self.mano[2].get_env_value() + 20;
+            }
+            else { //no hay cartas iguales.
+                let mut aux: u8 = 0;
+                for carta in &self.mano {
+                    if carta.get_env_value() > aux {
+                        aux = carta.get_env_value();
+                    }
+                }
+                return aux;
+            }
+        }
         pub fn write_total_player(tot: u32) {
             let mut file = File::create("./bin/tot.json").expect("Error creando archivo");
             
@@ -146,21 +172,35 @@ pub mod jugador {
             (tot.tot, true)
         }
         pub fn ask_in() -> Jugador {
+            println!("Creacion de jugador...");
             let term = Term::stdout();
             std::io::stdout().flush().expect("Error flusheando stdout");
             print!("Ingrese {}: ", "nombre".white().bold());
             std::io::stdout().flush().expect("Error flusheando stdout");
-            let nombre = term.read_line().unwrap();
+            let mut nombre = term.read_line().unwrap();
+            while nombre.is_empty() {
+                println!("Error: {}", "Vacio".red().underline());
+                print!("Ingrese {}: ", "nombre".white().bold());
+                std::io::stdout().flush().expect("Error flusheando stdout");
+                nombre = term.read_line().unwrap();
+            }
             print!("Ingrese {}: ", "descripcion".white().bold());
             std::io::stdout().flush().expect("Error flusheando stdout");
-            let descripcion = term.read_line().unwrap();
+            let mut descripcion = term.read_line().unwrap();
+            while descripcion.is_empty() {
+                println!("Error: {}", "Vacio".red().underline());
+                print!("Ingrese {}: ", "descripcion".white().bold());
+                std::io::stdout().flush().expect("Error flusheando stdout");
+                descripcion = term.read_line().unwrap();
+            }
             let mut sexo = String::new();
             loop {
+                sexo.clear();
                 print!("Ingrese {} {}: ", "sexo".magenta().bold(), "(m/f)".italic());
                 std::io::stdout().flush().expect("Error flusheando stdout");
                 std::io::stdin().read_line(&mut sexo).expect("Error leyendo linea");
                 match sexo.trim() {
-                    "m"| "f" | "M" | "F" => break,
+                    "m" | "f" | "M" | "F" => break,
                     _ => println!("Error: {}", "No reconocido".red()),
                 }
             }

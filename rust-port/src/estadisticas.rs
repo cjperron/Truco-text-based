@@ -10,10 +10,10 @@ pub mod estadisticas {
     pub struct Estadisticas {
         xp: u64,
         dinero: f64,
-        a_mentiroso: Atributo,
-        a_pescador: Atributo,
-        a_agresividad: Atributo,
-        a_tramposo: Atributo,
+        pub a_mentiroso: Atributo,
+        pub a_pescador: Atributo,
+        pub a_agresividad: Atributo,
+        pub a_tramposo: Atributo,
     }
     impl Estadisticas {
         pub fn from(xp: u64, dinero: f64) -> Estadisticas {
@@ -33,6 +33,17 @@ pub mod estadisticas {
             self.a_pescador.to_string(), 
             self.a_agresividad.to_string(), 
             self.a_tramposo.to_string());
+        }
+        pub fn r_new() -> Estadisticas {
+            use crate::atributo::atributo::Nivel;
+            Estadisticas {
+                xp: 0,
+                dinero: 0.0,
+                a_mentiroso: Atributo::from("Mentiroso", 0, Nivel::r_new()),
+                a_pescador: Atributo::from("Pescador", 0, Nivel::r_new()),
+                a_agresividad: Atributo::from("Agresividad", 0, Nivel::r_new()),
+                a_tramposo: Atributo::from("Tramposo", 0, Nivel::r_new()),    
+            }
         }
     }
 }
